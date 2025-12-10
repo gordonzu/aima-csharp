@@ -50,6 +50,27 @@ public sealed class AgentTest : IDisposable
 
     Assert.Equal(Direction.R, d1.Value);
     Assert.Equal(Direction.L, d2.Value);
+
+    dir = new Direction("right");
+    d1 = dir + Direction.L;
+    d2 = dir + Direction.R;
+
+    Assert.Equal("up", d1.Value);
+    Assert.Equal("down", d2.Value);
+
+    dir = new Direction("down");
+    d1 = dir + "right";
+    d2 = dir + "left";
+
+    Assert.Equal("left", d1.Value);
+    Assert.Equal("right", d2.Value);
+
+    dir = new Direction(Direction.L);
+    d1 = dir + Direction.R;
+    d2 = dir + Direction.L;
+
+    Assert.Equal(Direction.U, d1.Value);
+    Assert.Equal(Direction.D, d2.Value);
   }
 
 
