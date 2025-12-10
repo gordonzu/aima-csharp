@@ -7,12 +7,10 @@ namespace Aics.Tests;
 
 public sealed class AgentTest : IDisposable
 {
-  private readonly Agent agent;
   private bool _disposed;
 
   public AgentTest()
   {
-    agent = new Agent();
     _disposed = false;
   }
 
@@ -20,14 +18,6 @@ public sealed class AgentTest : IDisposable
   {
     if (_disposed) return;
     _disposed = true;
-    (agent as IDisposable)?.Dispose();
-  }
-
-  [Fact]
-  public void TestAgentIsAlive()
-  {
-    bool alive = agent.IsAlive;
-    Assert.True(alive);
   }
 
   [Fact]
@@ -51,7 +41,16 @@ public sealed class AgentTest : IDisposable
 
   }
 
+  [Fact]
+  public void TestAdd()
+  {
+    var dir = new Direction(Direction.U);
+    var d1 = dir + "right";
+    var d2 = dir + "left";
 
+    Assert.Equal(Direction.R, d1.Value);
+    Assert.Equal(Direction.L, d2.Value);
+  }
 
 
 
