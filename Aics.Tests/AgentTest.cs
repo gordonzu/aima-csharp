@@ -1,7 +1,7 @@
 ﻿///////////////////////////////////////////////////////
 // AgentTest.cs 
 //
-using Aics.App.Agents;
+using Aics.App.Agent;
 
 namespace Aics.Tests;
 
@@ -18,6 +18,26 @@ public sealed class AgentTest : IDisposable
   {
     if (_disposed) return;
     _disposed = true;
+  }
+
+  [Fact]
+  public void TestRandomAgentProgram()
+  {
+    List<string> list = new() { "Right", "Left", "Suck", "NoOp" };
+
+    var program = AgentPrograms.RandomAgentProgram(list);
+    var agent = new Agent(program);
+    var environment = new TrivialVacuumEnvironment();
+    environment.AddBaseObject(agent);
+    environment.Run();
+
+    var expected = new Dictionary<(int, int), string>
+    {
+      { (1, 0), "Clean" },
+      { (0, 0), "Clean" }
+    };
+
+    Assert.Equal(expected, environment.Status);
   }
 
   [Fact]
@@ -94,6 +114,13 @@ public sealed class AgentTest : IDisposable
 
 
 
-
-
 }
+
+
+
+
+
+
+
+
+

@@ -1,7 +1,7 @@
 // Direction.cs 
 //
 
-namespace Aics.App.Agents;
+namespace Aics.App.Agent;
 
 public sealed class Direction
 {
