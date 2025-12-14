@@ -10,4 +10,9 @@ public static class AgentPrograms
     Random r = new();
     return (percept) => actions[r.Next(actions.Count)];
   }
+
+  public static Agent RandomVacuumAgent()
+  {
+    return new Agent(RandomAgentProgram(["Right", "Left", "Suck", "NoOp"]));
+  }
 }

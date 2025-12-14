@@ -21,11 +21,28 @@ public sealed class AgentTest : IDisposable
   }
 
   [Fact]
+  public void TestRandomVacuumAgent()
+  {
+    var agent = AgentPrograms.RandomVacuumAgent();
+    var environment = new TrivialVacuumEnvironment();
+    environment.AddBaseObject(agent);
+    environment.Run();
+
+    var expected = new Dictionary<(int, int), string>
+    {
+      { (1, 0), "Clean" },
+      { (0, 0), "Clean" }
+    };
+
+    Assert.Equal(expected, environment.Status);
+  }
+
+  [Fact]
   public void TestRandomAgentProgram()
   {
-    List<string> list = new() { "Right", "Left", "Suck", "NoOp" };
+    var actions = new List<string> { "Right", "Left", "Suck", "NoOp" };
 
-    var program = AgentPrograms.RandomAgentProgram(list);
+    var program = AgentPrograms.RandomAgentProgram(actions);
     var agent = new Agent(program);
     var environment = new TrivialVacuumEnvironment();
     environment.AddBaseObject(agent);
